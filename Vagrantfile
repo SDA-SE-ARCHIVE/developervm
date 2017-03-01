@@ -28,9 +28,11 @@ Vagrant.configure("2") do |config|
 	vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
 	vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
 	vb.name = "DevelopmentBox"
+	
 	if not File.exists?(homeFile)
 		vb.customize ["createhd", "--filename", "#{homeFile}", "--size", "42768"]
-		vb.customize ["storageattach", :id, "--storagectl", "IDE", "--port", "0", "--device", "1", "--type", "hdd", "--medium", "#{homeFile}"]
+		vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata"]
+		vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", "1", "--type", "hdd", "--medium", "#{homeFile}"]
 	end
   end
 end
