@@ -24,7 +24,7 @@ In case you would like to start the vm in fullscreen, create a file:
 Right click on desktop in windows -> new -> link (Verknüpfung) -> Change the target to `"C:\Program Files\Oracle\VirtualBox\VirtualBox.exe" --startvm DevelopmentBox --fullscreen`. Click next -> name it "DevelopmentBox" -> Click Finish. While system boot (while you see the black screen with just text), click on "Anzeige" -> "Virtueller Monitor 2" -> "Benutzer Host-Monitor 2"
 
 ## Language
-To use Xfce in English, execute the following command:
+To use Xfce in English, execute the following command and logout/login afterwards:
 ```
 echo "export LANGUAGE=en_US.utf8
 export LANG=en_US.utf8
