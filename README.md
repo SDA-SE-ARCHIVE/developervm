@@ -23,6 +23,14 @@ set http_proxy=http://u139376:XyZ21@proxy.system.local:80
 In case you would like to start the vm in fullscreen, create a file:
 Right click on desktop in windows -> new -> link (Verknüpfung) -> Change the target to `"C:\Program Files\Oracle\VirtualBox\VirtualBox.exe" --startvm DevelopmentBox --fullscreen`. Click next -> name it "DevelopmentBox" -> Click Finish. While system boot (while you see the black screen with just text), click on "Anzeige" -> "Virtueller Monitor 2" -> "Benutzer Host-Monitor 2"
 
+## Language
+To use Xfce in English, execute the following command:
+```
+echo "export LANGUAGE=en_US.utf8
+export LANG=en_US.utf8
+export LC_ALL=en_US.utf8" > $HOME/.i18n
+```
+
 ## Login
 You can login with the provided user in proxy.bash. The password is the username. Please change the password.
 
