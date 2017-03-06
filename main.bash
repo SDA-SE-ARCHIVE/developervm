@@ -31,7 +31,10 @@ if [ ! -e /home/$user ]; then
 	echo "$user ALL=NOPASSWD: ALL" > /etc/sudoers.d/$user-nopasswd
 fi
 
-rpm --rebuilddb
+# fix bug "cannot reconstruct rpm from disk files"
+rm -rf /var/lib/rpm/__db.00*
+rpmdb --rebuilddb
+
 dnf upgrade -y
 
 # Language DE
@@ -89,7 +92,7 @@ dnf install -y xorg-x11-server-Xvfb
 
 # Fix nslookups
 cat /etc/nsswitch.conf | grep -v ^hosts > /etc/tmpnsswitch.conf
-echo "hosts:      files mdns4_minimal dns myhostname" >> /etc/tmpnsswitch.conf
+echo "hosts:      files dns myhostname" >> /etc/tmpnsswitch.conf
 mv -f /etc/tmpnsswitch.conf /etc/nsswitch.conf
 sudo systemctl restart network.service
 
@@ -132,17 +135,25 @@ source /etc/profile.d/java.sh
 
 if [ ! -e /opt/eclipse ]; then
 	cd /opt/
-	wget -O eclipse-dsl-neon-2-linux-gtk-x86_64.tar.gz 'http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/neon/2/eclipse-dsl-neon-2-linux-gtk-x86_64.tar.gz&r=1'
+	wget -O eclipse-dsl-neon-2-linux-gtk-x86_64.tar.gz 'http://spu.system.local/dezentral/eclipse/4.6-neon/eclipse-dsl-juno-SR2-linux-gtk-x86_64.tar.gz'
 	tar xfvz eclipse-dsl-neon-2-linux-gtk-x86_64.tar.gz
-	#rm -f eclipse-dsl-neon-2-linux-gtk-x86_64.tar.gz
-	echo "PATH=/opt/eclipse/bin/bin:$PATH" >> /etc/profile.d/java.sh
+	mv eclipse eclipse-dsl-juno # allow multiple versions
+	ln -s eclipse eclipse-dsl-juno
+	rm -f eclipse-dsl-neon-2-linux-gtk-x86_64.tar.gz
+	
+	echo "PATH=/opt/eclipse/bin:$PATH" >> /etc/profile.d/java.sh
 	cd ~
 	chown -R $user /opt/eclipse 
 	echo "-Djava.net.useSystemProxies=true" >> /opt/eclipse/eclipse.ini
 fi
 
+# Typings
+npm install typings --global
+
+echo "{\"registryURL\": \"https://api.typings.org\", \"proxy\": \"$http_proxy\", \"rejectUnauthorized\": false}" >> /home/$user/.typings.rc
+
 # keepass
-dnf install -y keepass
+dnf install -y keepass libreoffice galculator
 
 #/usr/lib/jvm/java-openjdk/bin/keytool -import -trustcacerts -alias SI -file /etc/pki/ca-trust/source/anchors/proxy.crt -keystore /etc/ssl/certs/java/cacerts
 cp $JAVA_HOME/jre/lib/security/cacerts certs.munger
