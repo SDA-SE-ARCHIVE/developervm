@@ -37,15 +37,18 @@ rpmdb --rebuilddb
 
 dnf upgrade -y
 
+#Install everything via dnf in one command to enhance speed
+dnf install -y keepass libreoffice galculator ntp java-1.8.0-openjdk maven gradle \
+	git gitk subversion meld pidgin shutter nodejs chromium ansible firefox xorg-x11-server-Xvfb \
+	kernel-devel-$(uname -r) kernel-headers-$(uname -r) gcc make dkms dnf-plugins-core wget langpacks-de 
+
 # Language DE
 echo "%_install_langs C:en:en_US:en_US.UTF-8:de_DE.UTF-8" > /etc/rpm/macros.image-language-conf
-dnf install -y langpacks-de 
 dnf reinstall -y glibc-common
 localectl set-locale LANG=de_DE.UTF-8
 localectl --no-convert set-x11-keymap de
 
 #Docker
-dnf -y install dnf-plugins-core wget
 dnf config-manager \
     --add-repo \
     https://docs.docker.com/engine/installation/linux/repo_files/fedora/docker.repo
@@ -69,7 +72,6 @@ systemctl restart docker
 dnf install -y wget unzip vim nano zsh
 
 # Guest additions
-dnf install -y kernel-devel-$(uname -r) kernel-headers-$(uname -r) gcc make dkms
 cd /tmp
 VBoxGuestAdditions_VERSION=5.1.14
 wget http://download.virtualbox.org/virtualbox/$VBoxGuestAdditions_VERSION/VBoxGuestAdditions_$VBoxGuestAdditions_VERSION.iso
@@ -87,27 +89,19 @@ systemctl set-default graphical.target
 mkdir .config/
 timedatectl set-timezone Europe/Berlin
 
-# Headless X-Window System
-dnf install -y xorg-x11-server-Xvfb
-
 # Fix nslookups
 cat /etc/nsswitch.conf | grep -v ^hosts > /etc/tmpnsswitch.conf
 echo "hosts:      files dns myhostname" >> /etc/tmpnsswitch.conf
 mv -f /etc/tmpnsswitch.conf /etc/nsswitch.conf
 sudo systemctl restart network.service
 
-dnf install -y chromium ansible firefox
 echo "chromium-browser --proxy-pac-url=http://proxy.system.local/accelerated_pac_base.pac --disable-web-security --disable-gpu" > /home/$user/chromium.sh
 chmod 555 /home/$user/chromium.sh
 
 curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
-dnf install -y nodejs
 npm config set https-proxy $https_proxy
 npm config set http-proxy $http_proxy
 
-dnf install -y git gitk subversion meld pidgin shutter
-
-dnf install -y maven gradle
 mkdir /home/$user/.m2/
 echo '
 <settings>
@@ -128,7 +122,6 @@ fi
 dnf install -y visualStudioCode.rpm
 
 #Java
-dnf install -y java-1.8.0-openjdk
 echo "JAVA_HOME=/etc/alternatives/java_sdk" > /etc/profile.d/java.sh
 echo "PATH=$JAVA_HOME/bin:$PATH" >> /etc/profile.d/java.sh
 source /etc/profile.d/java.sh
@@ -152,8 +145,6 @@ npm install typings --global
 
 echo "{\"registryURL\": \"https://api.typings.org\", \"proxy\": \"$http_proxy\", \"rejectUnauthorized\": false}" >> /home/$user/.typings.rc
 
-# keepass
-dnf install -y keepass libreoffice galculator
 
 #/usr/lib/jvm/java-openjdk/bin/keytool -import -trustcacerts -alias SI -file /etc/pki/ca-trust/source/anchors/proxy.crt -keystore /etc/ssl/certs/java/cacerts
 cp $JAVA_HOME/jre/lib/security/cacerts certs.munger
@@ -161,7 +152,6 @@ keytool -importkeystore -srckeystore $JAVA_HOME/jre/lib/security/cacerts -destke
 keytool -importcert -file /etc/pki/ca-trust/source/anchors/proxy.crt -keystore certs.munger -storepass changeit -noprompt -trustcacerts &>/dev/null
 
 #NTP
-dnf install -y ntp
 ntpdate ntp.system.local
 cat /etc/ntp.conf | grep -v ^server > /tmp/ntp.conf
 mv -f /tmp/ntp.conf /etc/ntp.conf
