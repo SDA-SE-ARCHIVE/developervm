@@ -134,7 +134,7 @@ if [ ! -e /opt/eclipse ]; then
 	ln -s eclipse eclipse-dsl-juno
 	rm -f eclipse-dsl-neon-2-linux-gtk-x86_64.tar.gz
 	
-	echo "PATH=/opt/eclipse/bin:$PATH" >> /etc/profile.d/java.sh
+	echo "PATH=/opt/eclipse/:$PATH" >> /etc/profile.d/java.sh
 	cd ~
 	chown -R $user /opt/eclipse 
 	echo "-Djava.net.useSystemProxies=true" >> /opt/eclipse/eclipse.ini
