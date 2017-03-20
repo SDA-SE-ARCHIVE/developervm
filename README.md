@@ -12,7 +12,7 @@ Some highlights:
 * Clone Vagrantfile via `git clone ssh://git@git.system.local:7999/aems/developervm.git` and store it on C:\developervm;
 * Open Powershell (Windows-Key -> Powershell (x86))
 * Change directory into it C:\developervm with `cd C:\developervm`
-* Execute .\setup.ps1 and grap a coffee
+* Execute .\setup.ps1 and grab a coffee
 * Start the VM via virtualbox
 
 In case you would like to start the vm in fullscreen, create a file:
