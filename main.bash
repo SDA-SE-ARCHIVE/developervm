@@ -128,11 +128,11 @@ source /etc/profile.d/java.sh
 
 if [ ! -e /opt/eclipse ]; then
 	cd /opt/
-	wget -O eclipse-dsl-neon-2-linux-gtk-x86_64.tar.gz 'http://spu.system.local/dezentral/eclipse/4.6-neon/eclipse-dsl-juno-SR2-linux-gtk-x86_64.tar.gz'
-	tar xfvz eclipse-dsl-neon-2-linux-gtk-x86_64.tar.gz
+	wget -O eclipse-dsl-neon-3-linux-gtk-x86_64.tar.gz 'http://spu.system.local/dezentral/eclipse/4.6-neon/eclipse-dsl-neon-3-linux-gtk-x86_64.tar.gz'
+	tar xfvz eclipse-dsl-neon-3-linux-gtk-x86_64.tar.gz
 	mv eclipse eclipse-dsl-neon # allow multiple versions
 	ln -s eclipse-dsl-neon eclipse
-	rm -f eclipse-dsl-neon-2-linux-gtk-x86_64.tar.gz
+	rm -f eclipse-dsl-neon-3-linux-gtk-x86_64.tar.gz
 	
 	echo "PATH=/opt/eclipse/:$PATH" >> /etc/profile.d/java.sh
 	cd ~
