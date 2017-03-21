@@ -95,7 +95,7 @@ echo "hosts:      files dns myhostname" >> /etc/tmpnsswitch.conf
 mv -f /etc/tmpnsswitch.conf /etc/nsswitch.conf
 sudo systemctl restart network.service
 
-echo "chromium-browser --proxy-pac-url=http://proxy.system.local/accelerated_pac_base.pac --disable-web-security --disable-gpu" > /home/$user/chromium.sh
+echo "chromium-browser --proxy-pac-url=http://proxy.system.local/accelerated_pac_base.pac --disable-gpu" > /home/$user/chromium.sh
 chmod 555 /home/$user/chromium.sh
 
 curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
@@ -130,8 +130,8 @@ if [ ! -e /opt/eclipse ]; then
 	cd /opt/
 	wget -O eclipse-dsl-neon-2-linux-gtk-x86_64.tar.gz 'http://spu.system.local/dezentral/eclipse/4.6-neon/eclipse-dsl-juno-SR2-linux-gtk-x86_64.tar.gz'
 	tar xfvz eclipse-dsl-neon-2-linux-gtk-x86_64.tar.gz
-	mv eclipse eclipse-dsl-juno # allow multiple versions
-	ln -s eclipse eclipse-dsl-juno
+	mv eclipse eclipse-dsl-neon # allow multiple versions
+	ln -s eclipse-dsl-neon eclipse
 	rm -f eclipse-dsl-neon-2-linux-gtk-x86_64.tar.gz
 	
 	echo "PATH=/opt/eclipse/:$PATH" >> /etc/profile.d/java.sh
