@@ -1,5 +1,6 @@
 # Introduction
 The target of this project is to provide a development environments. It is insecure and not for production environments.
+This README gives an overview, more information are in the [wiki](http://wiki.system.local/display/OTA/DeveloperVM).
 
 Some highlights:
 * The system wide proxy is set
