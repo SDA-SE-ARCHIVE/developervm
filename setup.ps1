@@ -1,6 +1,6 @@
 $user = Read-Host 'Please enter your username (unumber)'
 $proxypass = Read-Host 'Please enter your proxy password'
-$proxy="http://" + $user + ":" + $proxypass + "@" + "proxy2.system.local:80"
+$proxy="http://" + $user + ":" + $proxypass + "@" + "proxy.system.local:80"
 .\Set-InternetProxy -proxy $proxy 
 cat proxy.template.bash | %{$_ -replace "PASSWORD",$proxypass } | %{$_ -replace "USERUNUMBER",$user} | Set-Content  proxy.bash
 
