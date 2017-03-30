@@ -68,7 +68,7 @@ dnf install -y wget unzip vim nano zsh
 # Guest additions
 dnf install -y kernel-devel-$(uname -r) kernel-headers-$(uname -r) gcc make dkms
 cd /tmp
-VBoxGuestAdditions_VERSION=5.1.14
+VBoxGuestAdditions_VERSION=5.1.18
 wget http://download.virtualbox.org/virtualbox/$VBoxGuestAdditions_VERSION/VBoxGuestAdditions_$VBoxGuestAdditions_VERSION.iso
 mount -o loop /tmp/VBoxGuestAdditions_$VBoxGuestAdditions_VERSION.iso /mnt
 /mnt/VBoxLinuxAdditions.run 
