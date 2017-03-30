@@ -28,7 +28,7 @@ if [ ! -e /home/$user ]; then
 	chown -R 1002:1002 /home/$user
 	
 	echo "$user:$user" | chpasswd
-	echo "$user ALL=NOPASSWD: ALL" > /etc/sudoers.d/$user-nopasswd
+	echo "$user ALL=PASSWD: ALL" > /etc/sudoers.d/$user-nopasswd
 fi
 
 # fix bug "cannot reconstruct rpm from disk files"
@@ -47,6 +47,11 @@ echo "%_install_langs C:en:en_US:en_US.UTF-8:de_DE.UTF-8" > /etc/rpm/macros.imag
 dnf reinstall -y glibc-common
 localectl set-locale LANG=de_DE.UTF-8
 localectl --no-convert set-x11-keymap de
+if [ ! -e /home/$user/.i18n ]; then
+	echo "export LANGUAGE=en_US.utf8" > /home/$user/.i18n
+	echo "export LANG=en_US.utf8" >> /home/$user/.i18n
+	echo "export LC_ALL=en_US.utf8" >> /home/$user/.i18n
+fi
 
 #Docker
 dnf config-manager \
