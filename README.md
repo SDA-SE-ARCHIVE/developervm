@@ -27,7 +27,7 @@ export LC_ALL=en_US.utf8" > $HOME/.i18n
 ```
 
 ## Login
-You can login with the provided user in proxy.bash. The password is the username. Please change the password.
+You can login with the provided user in proxy.bash. The password is the username. Please change the password via `passwd` in the terminal.
 
 # Provisioning
 The user vagrant got a random password and the vagrant ssh-folder has been moved to /home/vagrant/ssh-safe. Please enable the ssh-keys by using the command `mv /home/vagrant/ssh-safe /home/vagrant/.ssh` in the VM.
