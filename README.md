@@ -58,6 +58,7 @@ The default package manager on the console is dnf. [Yum Extender (dnf)](http://w
 * Separate home folder is with an initial user not working in Xfce via vagrant right now
 * Error message "Provider 'virtualbox' not found. We'll automatically install it now": Make sure you have latest version of vagrant installed (minimum 1.9)
 * While using "vagrant up" the error "vboxmanage.exe machine is already locked for a session" is shown. End any tasks related to Virtual Box in the Windows Task Manager
+* Virutal GuestAdditions are not installable. Please use Virutal GuestAdditions Version 5.1.18
 
 # Bug Reporting
 Please report bugs with:
