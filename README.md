@@ -1,5 +1,6 @@
 # Introduction
 The target of this project is to provide a development environments. It is insecure and not for production environments.
+This README gives an overview, more information are in the [wiki](http://wiki.system.local/display/OTA/DeveloperVM).
 
 Some highlights:
 * The system wide proxy is set
@@ -10,14 +11,9 @@ Some highlights:
 ## Process
 * Install *latest* [vagrant](https://www.vagrantup.com/downloads.html) and *latest* [virtualbox](https://www.virtualbox.org/wiki/Downloads)
 * Clone Vagrantfile via `git clone ssh://git@git.system.local:7999/aems/developervm.git` and store it on C:\developervm;
-* Change proxy user and password in proxy.bash
-* Open a command line and change directory into it C:\developervm with `cd C:\developervm`
-* Set the proxy with your own credentials on the command line `set http_proxy=http://<proxyuser>:<proxypassword>@proxy.system.local:80` and set `https_proxy=http://<proxyuser>:<proxypassword>@proxy.system.local:80`, e.g. 
-```
-set https_proxy=http://u139376:XyZ21@proxy.system.local:80
-set http_proxy=http://u139376:XyZ21@proxy.system.local:80
-```
-* Start vagrant to setup for example the X-Window System and shut it down `vagrant up & vagrant halt & vagrant up & vagrant provision & vagrant halt`
+* Open Powershell (Windows-Key -> Powershell (x86))
+* Change directory into it C:\developervm with `cd C:\developervm`
+* Execute .\setup.ps1 and grab a coffee
 * Start the VM via virtualbox
 
 In case you would like to start the vm in fullscreen, create a file:
@@ -25,8 +21,7 @@ Right click on desktop in windows -> new -> link (Verknüpfung) -> Change the ta
 
 ## Language
 To use Xfce in English, execute the following command and logout/login afterwards:
-```
-echo "export LANGUAGE=en_US.utf8
+```echo "export LANGUAGE=en_US.utf8
 export LANG=en_US.utf8
 export LC_ALL=en_US.utf8" > $HOME/.i18n
 ```
