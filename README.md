@@ -49,11 +49,7 @@ For example `docker run hello-world`
 The default package manager on the console is dnf. [Yum Extender (dnf)](http://www.yumex.dk/) offers a GUI, open via ´yumex-dnf´.
 
 # Known Issues
-* After using "vagrant up" there is no application shown in virtual box. You need to start virtual box with administration privileges.
-* Separate home folder is with an initial user not working in Xfce via vagrant right now
-* Error message "Provider 'virtualbox' not found. We'll automatically install it now": Make sure you have latest version of vagrant installed (minimum 1.9)
-* While using "vagrant up" the error "vboxmanage.exe machine is already locked for a session" is shown. End any tasks related to Virtual Box in the Windows Task Manager
-* Virutal GuestAdditions are not installable. Please use Virutal GuestAdditions Version 5.1.18
+See [Wiki-Page](http://wiki.system.local/display/OTA/DeveloperVM).
 
 # Bug Reporting
 Please report bugs with:
