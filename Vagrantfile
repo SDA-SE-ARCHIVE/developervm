@@ -5,6 +5,7 @@ homeFile = File.join(File.dirname(__FILE__), "home.vdi")
 
 Vagrant.configure("2") do |config|
   config.vm.box = "fedora/25-cloud-base"
+  config.vm.box_url="http://spu.system.local/dezentral/vagrant/Fedora-Cloud-Base-Vagrant-25-1.3.x86_64.vagrant-virtualbox.box"
   config.vm.box_download_insecure = true
   config.vm.hostname = "DevelopmentBox"
   
