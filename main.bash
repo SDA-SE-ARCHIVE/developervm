@@ -2,9 +2,22 @@
 
 #MAINTAINER Signal Iduna <methoden-standards@signal-iduna.de>
 
+# fix bug "cannot reconstruct rpm from disk files"
+rm -rf /var/lib/rpm/__db.00*
+rpmdb --rebuilddb
+
+dnf upgrade -y
+dnf install -y kernel-devel-$(uname -r) kernel-headers-$(uname -r)
+
 if [ ! -e /home/$user ]; then
+
+    #Install everything via dnf in one command to enhance speed
+    dnf install -y keepass libreoffice galculator ntp java-1.8.0-openjdk maven gradle \
+	git gitk subversion meld pidgin shutter nodejs chromium ansible firefox xorg-x11-server-Xvfb \
+	gcc make dkms dnf-plugins-core wget langpacks-de wget unzip vim nano zsh openssl
+
 	groupadd -g 1002 $user
-	useradd -u 1002 --gid 1002 -m -p willNotBeUsed -s /bin/bash $user
+	useradd -u 1002 --gid 1002 -m -p willNotBeUsed -s /bin/zsh $user
 
 #In case you want to use a seperate home partion, you need to evaluate how this can work	
 #mv /home/$user /tmp
@@ -22,25 +35,19 @@ if [ ! -e /home/$user ]; then
 #	echo "/dev/sdb1 /home/$user ext4 defaults 1 1" >> /etc/fstab
 #	mount -a
 #	rsync -a /tmp/$user/ /home/$user
-	
-	dnf install -y openssl
 
-	chown -R 1002:1002 /home/$user
-	
 	echo "$user:$user" | chpasswd
 	echo "$user ALL=PASSWD: ALL" > /etc/sudoers.d/$user-nopasswd
+
+	# provides ZSH Settings / Plugins / etc
+	su - $user -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+	echo -e '\n#si requested alias' >> /home/$user/.zshrc
+	echo 'alias eclipse="/opt/eclipse/eclipse 2> /dev/null &"' >> /home/$user/.zshrc
+	echo 'alias code="function f() { code $* --disable-gpu; };f"' >> /home/$user/.zshrc
+	sed -i 's/robbyrussell/bira/g' /home/$user/.zshrc
+
+	chown -R 1002:1002 /home/$user
 fi
-
-# fix bug "cannot reconstruct rpm from disk files"
-rm -rf /var/lib/rpm/__db.00*
-rpmdb --rebuilddb
-
-dnf upgrade -y
-
-#Install everything via dnf in one command to enhance speed
-dnf install -y keepass libreoffice galculator ntp java-1.8.0-openjdk maven gradle \
-	git gitk subversion meld pidgin shutter nodejs chromium ansible firefox xorg-x11-server-Xvfb \
-	kernel-devel-$(uname -r) kernel-headers-$(uname -r) gcc make dkms dnf-plugins-core wget langpacks-de 
 
 # Language DE
 echo "%_install_langs C:en:en_US:en_US.UTF-8:de_DE.UTF-8" > /etc/rpm/macros.image-language-conf
@@ -72,9 +79,6 @@ ExecStart=/usr/bin/dockerd --insecure-registry app416020.system.local:5000 --bip
 systemctl enable docker
 systemctl restart docker
 
-
-# Generall system tools
-dnf install -y wget unzip vim nano zsh
 
 # Guest additions
 cd /tmp
