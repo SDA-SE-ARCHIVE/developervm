@@ -1,0 +1,40 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+  
+  vars:
+    proxy_settings : |
+      export http_proxy=http://{{ u_name }}:{{ proxy }}@proxy.system.local:80
+      export https_proxy=http://{{ u_name }}:{{ proxy }}@proxy.system.local:80
+      export ftp_proxy=http://{{ u_name }}:{{ proxy }}@proxy.system.local:80
+      export rsync_proxy=http://{{ u_name }}:{{ proxy }}@proxy.system.local:80
+      export no_proxy=localhost,127.0.0.1,system.local,system-a.local
+      export user={{ u_name }}
+      export proxypass={{ proxy }}
+
+    sudo_proxy: 'Defaults env_keep += "http_proxy https_proxy ftp_proxy no_proxy"'
+    
+    cmd_install_proxy_crt: curl -X GET "http://pki.system.local/pki/proxy.system.local.crt" 
+      --output  /etc/pki/ca-trust/source/anchors/proxy.crt
+
+    cmd_install_si_root_crt: curl -X GET "http://pki.system.local/pki/SIGNAL IDUNA RootCA(1).crt"
+      --output  /etc/pki/ca-trust/source/anchors/si_root.crt
+
+  tasks:
+
+  - name: Setup proxy profile
+    raw: "echo {{ proxy_settings | quote }} > /etc/profile.d/proxy.sh"
+    args:
+      executable: bash
+
+  - name: Setup sudo-proxy
+    raw: "echo {{ sudo_proxy | quote }} >> /etc/sudoers.d/sudo-proxy"
+    args:
+      executable: bash
+
+  - name: Install SI certificates
+    raw: "{{ cmd_install_proxy_crt }} && {{ cmd_install_si_root_crt }} && update-ca-trust extract"
+    args:
+      executable: bash
