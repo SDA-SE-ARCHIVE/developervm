@@ -30,6 +30,7 @@ Vagrant.configure("2") do |config|
     ansible.playbook = "user-config.yml"
     ansible.extra_vars = {
         u_name: unumber,
+        proxy: proxypass
     }
   end
 

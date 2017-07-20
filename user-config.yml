@@ -8,6 +8,9 @@
   #from passlib.apps import custom_app_context as pwd_context
   #hash = pwd_context.hash("somepass")
     user_passwd: '$6$rounds=656000$WCJXrIU37njsfQku$6kijczPtLQPj6eCbGQBRk0gioMfqh5IcGQ9yyDXnM9OPsH4gmrA9j6HTasfFXGK3h9NZ/gifGiIn832tHeOmk/'
+    
+    USR_HTTP_PROXY: http://{{u_name}}:{{proxy}}@proxy.system.local
+    NO_PROXY: 'localhost,127.0.0.1,.system.local,.system-a.local'
 
   tasks:
 
@@ -18,7 +21,7 @@
   - name: Create User
     user:
       name: "{{ u_name }}"
-      group: "{{ u_name }}"
+      groups: "{{ u_name }}, docker"
       password: "{{ user_passwd }}"
       shell: /bin/zsh
 
@@ -27,3 +30,9 @@
       path: /etc/sudoers.d/{{ u_name }}-nopasswd
       line: "{{ u_name }} ALL=PASSWD: ALL"
       create: yes
+
+  - name: Update docker config regarding proxy user
+    lineinfile:
+      path: /etc/systemd/system/docker.service.d/docker.conf
+      regexp: '^Environment='
+      line: "Environment=\"HTTP_PROXY={{USR_HTTP_PROXY}}\" \"NO_PROXY={{ NO_PROXY }}\""
