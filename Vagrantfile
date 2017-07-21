@@ -19,13 +19,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder ".", "/vagrant"
 
-  config.vm.provision "pre-configure User certs and proxy", type: "ansible_local" do |ansible|
-    ansible.playbook = "pre-configure.yml"
-    ansible.extra_vars = {
-        u_name: unumber,
-        proxy: proxypass
-    }
-  end
   config.vm.provision "creates user and settings", type: "ansible_local" do |ansible|
     ansible.playbook = "user-config.yml"
     ansible.extra_vars = {
