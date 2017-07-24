@@ -4,21 +4,28 @@
 homeFile = File.join(File.dirname(__FILE__), "home.vdi")
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "fedora/25-cloud-base"
-  config.vm.box_url="http://spu.system.local/dezentral/vagrant/Fedora-Cloud-Base-Vagrant-25-1.3.x86_64.vagrant-virtualbox.box"
-  config.vm.box_download_insecure = true
-  config.vm.hostname = "DevelopmentBox"
-  
-  config.vm.synced_folder ".", "/vagrant", disabled: true
 
   if not File.exists?(homeFile)
-	config.vm.provision :shell, :path=>"proxy.bash"
-	config.vm.provision :shell, :path=>"kernel.bash"
+    print "Please enter your username (unumber): "
+    unumber = STDIN.gets.chomp
+    print "Please enter your proxy password: "
+    proxypass = STDIN.gets.chomp
   end
-  if File.exists?(homeFile)
-	config.vm.provision :shell, :path=>"main.bash"
-	config.vm.provision :shell, :path=>"tests.bash"
-  end  
+
+  config.vm.box = "fedora/SI-custom"
+  config.vm.box_url="http://sda-devbox-ci.system.local:8080/job/VagrantDeveloperBox/lastSuccessfulBuild/artifact/devvm/devel-vm.vbox"
+  config.vm.box_download_insecure = true
+  config.vm.hostname = "DevelopmentBox"
+
+  config.vm.synced_folder ".", "/vagrant"
+
+  config.vm.provision "creates user and settings", type: "ansible_local" do |ansible|
+    ansible.playbook = "user-config.yml"
+    ansible.extra_vars = {
+        u_name: unumber,
+        proxy: proxypass
+    }
+  end
 
   config.vm.provider :virtualbox do |vb|
     vb.gui = true
@@ -29,12 +36,9 @@ Vagrant.configure("2") do |config|
 	vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
 	vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
 	vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional']  
-	vb.name = "DevelopmentBox"
-	
-	if not File.exists?(homeFile)
-		vb.customize ["createhd", "--filename", "#{homeFile}", "--size", "42768"]
-		vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata"]
-		vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", "1", "--type", "hdd", "--medium", "#{homeFile}"]
-	end
+	vb.name = "DevelopmentBox2.0"
+	vb.customize ["createhd", "--filename", "#{homeFile}", "--size", "42768"]
+	vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata"]
+	vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", "1", "--type", "hdd", "--medium", "#{homeFile}"]
   end
 end

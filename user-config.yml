@@ -1,0 +1,29 @@
+---
+- hosts: all
+  become: yes
+  become_user: root
+  become_method: sudo
+
+  vars:
+  #from passlib.apps import custom_app_context as pwd_context
+  #hash = pwd_context.hash("somepass")
+    user_passwd: '$6$rounds=656000$WCJXrIU37njsfQku$6kijczPtLQPj6eCbGQBRk0gioMfqh5IcGQ9yyDXnM9OPsH4gmrA9j6HTasfFXGK3h9NZ/gifGiIn832tHeOmk/'
+    
+  tasks:
+
+  - name: Create Users group
+    group:
+      name: "{{ u_name }}"
+
+  - name: Create User
+    user:
+      name: "{{ u_name }}"
+      groups: "{{ u_name }}, docker"
+      password: "{{ user_passwd }}"
+      shell: /bin/zsh
+
+  - name: Create Users sudoers file
+    lineinfile:
+      path: /etc/sudoers.d/{{ u_name }}-nopasswd
+      line: "{{ u_name }} ALL=PASSWD: ALL"
+      create: yes
