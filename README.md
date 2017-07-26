@@ -9,18 +9,18 @@ Some highlights:
 
 # Setup
 ## Process
-* Install [vagrant](https://www.vagrantup.com/downloads.html) (1.9.3) and [virtualbox](https://www.virtualbox.org/wiki/Downloads) (5.1.18)
+* Install [vagrant](https://www.vagrantup.com/downloads.html) (1.9.3) and [virtualbox](https://www.virtualbox.org/wiki/Downloads) (5.2.22)
 * Clone Vagrantfile via `git clone ssh://git@git.system.local:7999/aems/developervm.git` and store it on C:\developervm;
 * Open Powershell (Windows-Key -> Powershell (x86))
 * Change directory into it C:\developervm with `cd C:\developervm`
-* Execute .\setup.ps1 and grab a coffee
+* Execute .\setup.ps1 and enter your u-number and former proxy (proxy is right now deprecated)
 * Start the VM via virtualbox
 
 In case you would like to start the vm in fullscreen, create a file:
 Right click on desktop in windows -> new -> link (Verknüpfung) -> Change the target to `"C:\Program Files\Oracle\VirtualBox\VirtualBox.exe" --startvm DevelopmentBox --fullscreen`. Click next -> name it "DevelopmentBox" -> Click Finish. While system boot (while you see the black screen with just text), click on "Anzeige" -> "Virtueller Monitor 2" -> "Benutzer Host-Monitor 2"
 
 ## Login
-You can login with the provided user in proxy.bash. The password is the username. Please change the password via `passwd` in the terminal.
+You can login with the provided user number you entered while execute setup.ps1. The password is the 'start1'. Please change the password via `passwd` in the terminal.
 
 # Provisioning
 The user vagrant got a random password and the vagrant ssh-folder has been moved to /home/vagrant/ssh-safe. Please enable the ssh-keys by using the command `mv /home/vagrant/ssh-safe /home/vagrant/.ssh` in the VM.
