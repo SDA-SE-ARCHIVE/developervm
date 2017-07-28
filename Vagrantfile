@@ -8,8 +8,6 @@ Vagrant.configure("2") do |config|
   if not File.exists?(homeFile)
     print "Please enter your username (unumber): "
     unumber = STDIN.gets.chomp
-    print "Please enter your proxy password: "
-    proxypass = STDIN.gets.chomp
   end
 
   config.vm.box = "fedora/SI-custom"
@@ -22,8 +20,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "creates user and settings", type: "ansible_local" do |ansible|
     ansible.playbook = "user-config.yml"
     ansible.extra_vars = {
-        u_name: unumber,
-        proxy: proxypass
+        u_name: unumber
     }
   end
 
