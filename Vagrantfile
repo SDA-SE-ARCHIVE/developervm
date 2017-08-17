@@ -37,5 +37,8 @@ Vagrant.configure("2") do |config|
 	vb.customize ["createhd", "--filename", "#{homeFile}", "--size", "42768"]
 	vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata"]
 	vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", "1", "--type", "hdd", "--medium", "#{homeFile}"]
+	#first we need the emptydrive than the addiditons - otherwise the additions file will not be found
+	vb.customize ["storageattach", :id, "--storagectl", "IDE", "--port", "1", "--device", "0", "--type", "dvddrive", "--medium", "emptydrive"]
+	vb.customize ["storageattach", :id, "--storagectl", "IDE", "--port", "1", "--device", "0", "--type", "dvddrive", "--medium", "additions"]
   end
 end
