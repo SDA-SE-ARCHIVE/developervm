@@ -18,7 +18,7 @@
   - name: Create User
     user:
       name: "{{ u_name }}"
-      groups: "{{ u_name }}, docker"
+      groups: "{{ u_name }}, docker, vboxsf"
       password: "{{ user_passwd }}"
       shell: /bin/zsh
 
