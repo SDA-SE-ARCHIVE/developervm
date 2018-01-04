@@ -62,7 +62,8 @@ Update DeveloperBox for packages and configuration stuff. Displays information a
 -i, --info   display OS major version and update options
 --fetch-updatescript   fetches the most current version of this update script from scm
 --perform-update   standard developer box update including packages and configuration
---perform-os-update   performs OS update```
+--perform-os-update   performs OS update
+```
 
 from now on the script requires an option command to do anything but print help. as stated above to update your system call the script additionally with --perform-update option. to migrate please call it with --perform-os-update option. again - keep in mind that this requires time and in progress your box will be rebooted!
 
