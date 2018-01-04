@@ -43,13 +43,14 @@ The default package manager on the console is dnf. [Yum Extender (dnf)](http://w
 
 ## Update / Migration path
 
-to update the development box you should call the script /usr/local/bin/update_devbox_tags.bash with sudo permissions.
+to __update__ the development box you should call the script /usr/local/bin/update_devbox_tags.bash with sudo permissions.
 
 `sudo /usr/local/bin/update_devbox_tags.bash`
 
 the update command updates packages, kernel and SI proprietary configuration. (remark: if you have the new version of the update script you have to call it with option --perform-update)
 
-to migrate means lift up your fedora OS release version to the next release version if available. this process takes time. During tests an average time of 45 - 60 minutes was measured. before migrate make sure our system is up to date. so please follow the instructions to update your development box.
+
+to __migrate__ means lift up your fedora OS release version to the next release version if available. this process takes time. During tests an average time of 45 - 60 minutes was measured. before migrate make sure our system is up to date. so please follow the instructions to update your development box.
 
 after your system is up to date and so your /usr/local/bin/update_devbox_tags.bash script you can call it without any options. a help should be displayed similar like this ...
 
@@ -57,11 +58,11 @@ Usage: update_devbox_tags.bash OPTION ...
 
 Update DeveloperBox for packages and configuration stuff. Displays information and related ...
 
-`-h, --help   display this help and exit
+```-h, --help   display this help and exit
 -i, --info   display OS major version and update options
 --fetch-updatescript   fetches the most current version of this update script from scm
 --perform-update   standard developer box update including packages and configuration
---perform-os-update   performs OS update`
+--perform-os-update   performs OS update```
 
 from now on the script requires an option command to do anything but print help. as stated above to update your system call the script additionally with --perform-update option. to migrate please call it with --perform-os-update option. again - keep in mind that this requires time and in progress your box will be rebooted!
 
