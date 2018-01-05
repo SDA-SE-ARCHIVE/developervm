@@ -31,7 +31,7 @@ Vagrant.configure("2") do |config|
 	vb.customize ["modifyvm", :id, "--monitorcount", "2"]
 	vb.customize ["modifyvm", :id, "--vram", "100"]
 	vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
-	vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
+	vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
 	vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional']  
 	vb.name = "DevelopmentBox2.0"
 	vb.customize ["createhd", "--filename", "#{homeFile}", "--size", "42768"]
