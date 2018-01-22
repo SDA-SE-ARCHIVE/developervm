@@ -43,16 +43,16 @@ The default package manager on the console is dnf. [Yum Extender (dnf)](http://w
 
 ## Update / Migration path
 
-to __update__ the development box you should call the script /usr/local/bin/update_devbox_tags.bash with sudo permissions.
+To __update__ your development box you have to call the script /usr/local/bin/update_devbox_tags.bash with sudo permissions.
 
-`sudo /usr/local/bin/update_devbox_tags.bash` or `sudo /usr/local/bin/update_devbox_tags.bash --perform-update` depends on version of the update script.
+`sudo /usr/local/bin/update_devbox_tags.bash` or `sudo /usr/local/bin/update_devbox_tags.bash --perform-update` depends on the current version of your update script.
 
-the update command updates packages, kernel and SI proprietary configuration. (remark: if you have the new version of the update script you have to call it with option --perform-update)
+The update performes package-, kernel- and SI proprietary configuration updates. (remark: if you have the new version of the update script you have to call it with option --perform-update)
 
 
-to __migrate__ means lift up your fedora OS release version to the next release version if available. this process takes time. During tests an average time of 45 - 60 minutes was measured. before migrate make sure our system is up to date. so please follow the instructions to update your development box.
+To __migrate__ the box means lift up your Fedora OS release version to the next release version if possible. This process takes a while. During tests an average execution time of 45 - 60 minutes was measured. Before migrating make sure our system is up to date. Please follow the instructions to update your development box.
 
-after your system is up to date and so your /usr/local/bin/update_devbox_tags.bash script you can call it without any options. a help should be displayed similar like this ...
+After updating your system your update script /usr/local/bin/update_devbox_tags.bash script will be updated too - you can call it without any options. A help should be displayed similar like this ...
 
 Update DeveloperBox for packages and configuration stuff. Displays information and related ...
 
@@ -63,11 +63,11 @@ Update DeveloperBox for packages and configuration stuff. Displays information a
 --perform-os-update   performs OS update
 ```
 
-to migrate your system to next available version issue following command 
+To migrate your system to the next available version issue following command
 
 `sudo  /usr/local/bin/update_devbox_tags.bash --perform-os-update`
 
-from now on the script requires an option command to do anything but print help. as stated above to update your system call the script additionally with --perform-update option. to migrate please call it with --perform-os-update option. again - keep in mind that this requires time and in progress your box will be rebooted!
+From now on the script requires an option to do anything but print help. As stated above to update your system call the script additionally with --perform-update option. To migrate please call it with --perform-os-update option. again - keep in mind that this requires time and in progress your box will be rebooted!
 
 Right now the max. support Fedora Release Version is 27.
 
