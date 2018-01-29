@@ -25,17 +25,5 @@
   - name: Create Users sudoers file
     lineinfile:
       path: /etc/sudoers.d/{{ u_name }}-nopasswd
-      line: "{{ u_name }} ALL=NOPASSWD: ALL"
-      regexp: '{{ u_name }} ALL='
-      create: yes
-
-  - name: Create inital User resource configuration
-    become: yes
-    become_user: "{{ u_name }}"
-    command: "/usr/local/bin/update_devbox_tags.bash --user-resource-init"
-
-  - name: Modify Users sudoers file
-    lineinfile:
-      path: /etc/sudoers.d/{{ u_name }}-nopasswd
       line: "{{ u_name }} ALL=PASSWD: ALL"
-      regexp: '{{ u_name }} ALL='
+      create: yes
