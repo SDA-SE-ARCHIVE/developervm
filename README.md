@@ -1,3 +1,7 @@
+# CURRENT ISSUES
+* if you try to upgrade your developer box from fedora version X to the next version X + 1 please close all applications (like firefox) because otherwise it could harm the update process.
+* if you try to setup your developer box for the very first time and you experience some weird behaviour please process a box update (see section box update) with following command `sudo /usr/local/bin/update_devbox_tags.bash --perform-update`
+
 # Introduction
 The target of this project is to provide a development environments. It is insecure and not for production environments.
 This README gives an overview, more information are in the [wiki](http://wiki.system.local/display/OTA/DeveloperVM).
