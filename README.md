@@ -9,7 +9,7 @@ Some highlights:
 
 # Setup
 ## Process
-* Install [vagrant](https://www.vagrantup.com/downloads.html) (2.0.4) and [virtualbox](https://www.virtualbox.org/wiki/Downloads) (5.2.8)
+* Install [vagrant](https://www.vagrantup.com/downloads.html) (2.1.1) and [virtualbox](https://www.virtualbox.org/wiki/Downloads) (5.2.12) - both artifacts are also be located at `\\spu.system.local\dezentral` in folders named accordingly
 * Clone Vagrantfile via `git clone ssh://git@git.system.local:7999/aems/developervm.git` and store it on C:\developervm;
 * Open Powershell (Windows-Key -> Powershell (x86))
 * Change directory into it C:\developervm with `cd C:\developervm`
