@@ -25,7 +25,8 @@
   - name: Create Users sudoers file
     lineinfile:
       path: /etc/sudoers.d/{{ u_name }}-nopasswd
-      line: "{{ u_name }} ALL=PASSWD: ALL"
+      line: "{{ u_name }} ALL=NOPASSWD: ALL"
+      regexp: '{{ u_name }} ALL='
       create: yes
 
   - name: Create inital User resource configuration
