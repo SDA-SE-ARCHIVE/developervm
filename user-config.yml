@@ -40,3 +40,9 @@
       line: "{{ u_name }} ALL=PASSWD: ALL"
       regexp: '{{ u_name }} ALL='
 
+  - name: Ensure DisplayManager is enabled
+    service:
+      name: lightdm
+      state: started
+      enabled: yes
+
