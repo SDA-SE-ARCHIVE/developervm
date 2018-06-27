@@ -47,6 +47,9 @@ The default package manager on the console is dnf. [Yum Extender (dnf)](http://w
 
 ## Update / Migration path
 
+### REMARKS:
+Its strongly recommended to close all applications before to start the update.
+
 To __update__ your development box you have to call the script /usr/local/bin/update_devbox_tags.bash with sudo permissions.
 
 `sudo /usr/local/bin/update_devbox_tags.bash` or `sudo /usr/local/bin/update_devbox_tags.bash --perform-update` depends on the current version of your update script.
@@ -75,7 +78,7 @@ From now on the script requires an option to do anything but print help. As stat
 
 Right now the max. support Fedora Release Version is 28.
 
-## REMARKS:
+### REMARKS:
 Its strongly recommended to close all applications before to start the update.
 
 # Known Issues
