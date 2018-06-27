@@ -73,7 +73,10 @@ To migrate your system to the next available version issue following command
 
 From now on the script requires an option to do anything but print help. As stated above to update your system call the script additionally with --perform-update option. To migrate please call it with --perform-os-update option. again - keep in mind that this requires time and in progress your box will be rebooted!
 
-Right now the max. support Fedora Release Version is 27.
+Right now the max. support Fedora Release Version is 28.
+
+## REMARKS:
+Its strongly recommended to close all applications before to start the update.
 
 # Known Issues
 See [Wiki-Page](http://wiki.system.local/display/OTA/DeveloperVM).
