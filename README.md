@@ -70,6 +70,8 @@ Update DeveloperBox for packages and configuration stuff. Displays information a
 --perform-os-update   performs OS update
 ```
 
+Before migration to the next supported OS level an box update with ```--perform-update``` is mandatory.
+
 To migrate your system to the next available version issue following command
 
 `sudo  /usr/local/bin/update_devbox_tags.bash --perform-os-update`
