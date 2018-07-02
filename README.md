@@ -70,7 +70,7 @@ Update DeveloperBox for packages and configuration stuff. Displays information a
 --perform-os-update   performs OS update
 ```
 
-Before migration to the next supported OS level an box update with ```--perform-update``` is mandatory.
+__Before migration__ to the next supported OS level an __box update__ with ```--perform-update``` __is mandatory__.
 
 To migrate your system to the next available version issue following command
 
