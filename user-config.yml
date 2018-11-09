@@ -8,7 +8,7 @@
   #from passlib.apps import custom_app_context as pwd_context
   #hash = pwd_context.hash("somepass")
     user_passwd: '$6$rounds=656000$WCJXrIU37njsfQku$6kijczPtLQPj6eCbGQBRk0gioMfqh5IcGQ9yyDXnM9OPsH4gmrA9j6HTasfFXGK3h9NZ/gifGiIn832tHeOmk/'
-    
+
   tasks:
 
   - name: Create Users group
@@ -29,10 +29,10 @@
       regexp: '{{ u_name }} ALL='
       create: yes
 
-  - name: Create inital User resource configuration
-    become: yes
-    become_user: "{{ u_name }}"
-    command: "/usr/local/bin/update_devbox_tags.bash --user-resource-init"
+  # - name: Create inital User resource configuration
+  #   become: yes
+  #   become_user: "{{ u_name }}"
+  #   command: "/usr/local/bin/update_devbox_tags.bash --user-resource-init"
 
   - name: Modify Users sudoers file
     lineinfile:
@@ -45,4 +45,3 @@
       name: lightdm
       state: started
       enabled: yes
-
