@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=Intellij IDEA
+Keywords=java;intellij;idea
+GenericName=Java Integrated Development Environment
+Type=Application
+Categories=Development;Programming
+Terminal=false
+StartupNotify=true
+Exec="/opt/intellij/bin/idea.sh" %u
+Icon=/opt/intellij/bin/idea.png

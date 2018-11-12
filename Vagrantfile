@@ -8,6 +8,8 @@ Vagrant.configure("2") do |config|
     print "Please enter your username: "
     username = STDIN.gets.chomp
   end
+  print "Please enter 1 or 2 for monitorcount: "
+  monitorcount = STDIN.gets.chomp
 
   config.vm.box = "fedora/sdase-development"
   config.vm.box_url="http://virtualbox.s3.eu-de.objectstorage.softlayer.net/sdase-development-v1.0.0.box?AWSAccessKeyId=0ddef02f11354a89bc95f45b6a71082c&Expires=1607004000&Signature=g2cJ5jI17JZZ3NdpfJu%2FgMw0VfE%3D"
@@ -27,7 +29,7 @@ Vagrant.configure("2") do |config|
     vb.gui = true
     vb.memory = 10240
     vb.cpus = 4
-    vb.customize ["modifyvm", :id, "--monitorcount", "2"]
+    vb.customize ["modifyvm", :id, "--monitorcount", monitorcount]
     vb.customize ["modifyvm", :id, "--vram", "100"]
     vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
     vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
