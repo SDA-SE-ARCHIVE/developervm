@@ -51,6 +51,6 @@
       src: "{{ item }}"
       dest: /usr/share/applications
       owner: "{{ u_name }}"
-      mode: 744
+      mode: 0744
     with_fileglob:
     - "shortcuts/*"
