@@ -45,3 +45,12 @@
       name: lightdm
       state: started
       enabled: yes
+
+  - name: Create application shortcuts
+    copy:
+      src: "{{ item }}"
+      dest: /usr/share/applications
+      owner: "{{ u_name }}"
+      mode: 744
+    with_fileglob:
+    - "shortcuts/*"

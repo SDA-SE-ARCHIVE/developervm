@@ -2,3 +2,7 @@
 proxy.bash
 .project
 home.vdi
+gradle*
+.gradle
+.idea
+user-config.retry
