@@ -1,0 +1,16 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Name=Postman
+GenericName=HTTP Client
+Comment=Tool for working with http request and response
+Path=/opt/Postman/app
+Exec=/opt/Postman/app/Postman
+Icon=/opt/Postman/app/resources/app/assets/icon.png
+Categories=IDE;Development
+WM_CLASS=Postman
+StartupWMClass=Postman
+StartupNotify=true
+Keywords=Database;SQL;IDE;JDBC;ODBC;MySQL;PostgreSQL
+MimeType=message/http
