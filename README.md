@@ -6,16 +6,21 @@ The target of this project is to provide a development environments. It is insec
 This README gives an overview.
 
 # Setup
-## Process
 * Install [vagrant](https://www.vagrantup.com/downloads.html) (2.2.0) and [virtualbox](https://www.virtualbox.org/wiki/Downloads) (5.2)
-* Clone Vagrantfile via `git clone ssh://git@github.com/SDA-SE/developervm.git` and store it on C:\developervm;
+
+## Windows
+* Clone Vagrantfile via `git clone ssh://git@github.com/SDA-SE/developervm.git` and store it on `C:\developervm`;
 * Open Powershell (Windows-Key -> Powershell (x86))
-* Change directory into it C:\developervm with `cd C:\developervm`
+* Change directory into it `C:\developervm` with `cd C:\developervm`
 * Execute `.\setup.ps1`
 * Start the VM via Desktop link or directly via VirtualBox.
 
+## Linux and MacOS
+* `git clone ssh://git@github.com/SDA-SE/developervm.git`
+* `vagrant up`
+
 ## Login
-You can login with the provided username you entered while execute `setup.ps1`. The initial password is 'start1'. Please change the password via `passwd` in the terminal.
+You can login with the provided username you entered while execute `setup.ps1` or `vagrant up`. The initial password is `start1`. Please change the password via `passwd` in the terminal.
 
 # Provisioning
 The user vagrant got a random password and the vagrant ssh-folder has been moved to /home/vagrant/ssh-safe. Please enable the ssh-keys by using the command `mv /home/vagrant/ssh-safe /home/vagrant/.ssh` in the VM.
