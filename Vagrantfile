@@ -4,10 +4,8 @@
 homeFile = File.join(File.dirname(__FILE__), "home.vdi")
 
 Vagrant.configure("2") do |config|
-  if not File.exists?(homeFile)
-    print "Please enter your username: "
-    username = STDIN.gets.chomp
-  end
+  print "Please enter your username: "
+  username = STDIN.gets.chomp
   print "Please enter 1 or 2 for monitorcount: "
   monitorcount = STDIN.gets.chomp
 
