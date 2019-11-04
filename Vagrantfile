@@ -9,8 +9,8 @@ Vagrant.configure("2") do |config|
   print "Please enter 1 or 2 for monitorcount: "
   monitorcount = STDIN.gets.chomp
 
-  config.vm.box = "fedora/sdase-development"
-  config.vm.box_url="http://virtualbox.s3.eu-de.objectstorage.softlayer.net/sdase-development-v1.0.0.box?AWSAccessKeyId=0ddef02f11354a89bc95f45b6a71082c&Expires=1607004000&Signature=g2cJ5jI17JZZ3NdpfJu%2FgMw0VfE%3D"
+  config.vm.box = "fedora/sdase-development.1.0.1"
+  config.vm.box_url="https://s3.eu-de.cloud-object-storage.appdomain.cloud/virtualbox/sdase-development-v1.0.1.box?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Expires=63072000&X-Amz-Credential=a28f12a7ae03481ba73751cae5a6014f%2F20191104%2Feu-de-standard%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Date=20191104T140304Z&X-Amz-Signature=ed2aa331c184c0df17501d9defcde5df9e96a9fd8d85a13aeecaa8378a1531c8"
   config.vm.box_download_insecure = true
   config.vm.hostname = "DevelopmentBox"
 
@@ -33,9 +33,11 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--accelerate3d", "off"]
     vb.customize ['modifyvm', :id, '--clipboard', 'bidirectional']
     vb.name = "DevelopmentBox"
-    vb.customize ["createhd", "--filename", "#{homeFile}", "--size", "42768"]
-    vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata"]
-    vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", "1", "--type", "hdd", "--medium", "#{homeFile}"]
+    unless File.exist?(File.join(File.dirname(__FILE__), "home.vdi"))
+	    vb.customize ["createhd", "--filename", "#{homeFile}", "--size", "42768"]
+		vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata"]
+		vb.customize ["storageattach", :id, "--storagectl", "SATA Controller", "--port", "1", "--type", "hdd", "--medium", "#{homeFile}"]
+	end
     #first we need the emptydrive than the addiditons - otherwise the additions file will not be found
     vb.customize ["storageattach", :id, "--storagectl", "IDE", "--port", "1", "--device", "0", "--type", "dvddrive", "--medium", "emptydrive"]
     vb.customize ["storageattach", :id, "--storagectl", "IDE", "--port", "1", "--device", "0", "--type", "dvddrive", "--medium", "additions"]
